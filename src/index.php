@@ -125,7 +125,11 @@ if (isset($_SESSION['user_id']) && $_SESSION['time'] + 60 * 60 * 24 > time()) {
                 </div>
                 <div class="modal-contents-pc-part d-none d-lg-block pt-3">
                   <p class="font-weight-bold modal-title">学習コンテンツ (複数選択可)</p>
-                  <input id="contents2" type="checkbox" value="1" name="contents[]">
+                  <?php foreach($contents as $index => $content) : ?>
+                    <input id="contents<?= $index + 1?>" type="checkbox" value="<?= $index + 1?>" name="contents[]">
+                    <label for="contents<?= $index + 1?>"><?php echo $content['content']; ?></label>
+                  <?php endforeach; ?>
+                  <!-- <input id="contents2" type="checkbox" value="1" name="contents[]">
                   <label for="contents2">ドットインストール</label>
 
                   <input id="contents1" type="checkbox" value="2" name="contents[]">
@@ -133,7 +137,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['time'] + 60 * 60 * 24 > time()) {
 
 
                   <input id="contents3" type="checkbox" value="3" name="contents[]">
-                  <label for="contents3">POSSE課題</label>
+                  <label for="contents3">POSSE課題</label> -->
                 </div>
 
                 <div class="modal-contents-sp-part d-block d-lg-none pt-3">
@@ -145,14 +149,18 @@ if (isset($_SESSION['user_id']) && $_SESSION['time'] + 60 * 60 * 24 > time()) {
                     <div class="modal-contents-over-select"></div>
                   </div>
                   <div id="modal-contents-check-box">
-                    <input type="checkbox" id="contents5" value="1" name="contents[]">
+                    <!-- <input type="checkbox" id="contents5" value="1" name="contents[]">
                     <label for="contents5">ドットインストール</label>
 
                     <input type="checkbox" id="contents4" value="2" name="contents[]">
                     <label for="contents4">N予備校</label>
 
                     <input type="checkbox" id="contents6" value="3" name="contents[]">
-                    <label for="contents6">POSSE課題</label>
+                    <label for="contents6">POSSE課題</label> -->
+                    <?php foreach($contents as $index => $content) : ?>
+                    <input id="contents<?= $index + 1 + count($contents)?>" type="checkbox" value="<?= $index + 1?>" name="contents[]">
+                    <label for="contents<?= $index + 1 + count($contents)?>"><?php echo $content['content']; ?></label>
+                    <?php endforeach; ?>
                   </div>
                 </div>
 

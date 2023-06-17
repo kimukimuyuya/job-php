@@ -9,16 +9,18 @@ $stmt->execute(array(
   "{$_GET['month']}%"
 ));
 
-for ($i = 0; $i < 3; $i++) {
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+for ($i = 0; $i < count($results); $i++) {
   $pie_contents[$i]['hour'] = 0;
   $pie_contents[$i]['content'] = '';
   $pie_contents[$i]['color_code'] = '';
 }
 
-foreach ($stmt->fetchAll() as $index => $pie_contents_data) {
+foreach ($results as $index => $pie_contents_data) {
   $pie_contents[$pie_contents_data['id'] - 1]['hour'] = round((float)$pie_contents_data['hour'], 2);
   $pie_contents[$pie_contents_data['id'] - 1]['content'] = $pie_contents_data['content'];
   $pie_contents[$pie_contents_data['id'] - 1]['color_code'] = $pie_contents_data['color_code'];
 }
 
-echo json_encode($pie_contents);
+echo json_encode($pie_contents, JSON_UNESCAPED_UNICODE);

@@ -21,4 +21,4 @@ foreach($stmt->fetchAll() as $index => $pie_languages_data) {
   $pie_languages[$pie_languages_data['id'] - 1]['color_code'] = $pie_languages_data['color_code'];
 }
 
-echo json_encode($pie_languages);
+echo json_encode($pie_languages, JSON_UNESCAPED_UNICODE);

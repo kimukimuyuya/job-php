@@ -337,23 +337,29 @@
       dataarray.push([pieContentsData[i]['content'], pieContentsData[i]['hour']]);
     }
     var data = google.visualization.arrayToDataTable(dataarray);
+
+    var sliceColors = [];
+    for (var i = 0; i < pieContentsData.length; i++) {
+      sliceColors[i] = { color: pieContentsData[i]['color_code']}
+    }
   
     var options = {
       legend: {
         position: "none",
       },
       pieHole: 0.5,
-      slices: {
-        0: {
-          color: '#0345ec'
-        },
-        1: {
-          color: '#0f71bd'
-        },
-        2: {
-          color: '#20bdde'
-        },
-      },
+      // slices: {
+      //   0: {
+      //     color: '#0345ec'
+      //   },
+      //   1: {
+      //     color: '#0f71bd'
+      //   },
+      //   2: {
+      //     color: '#20bdde'
+      //   },
+      // },
+      slices: sliceColors,
       chartArea: {
         width: '100%',
         height: '100%',
