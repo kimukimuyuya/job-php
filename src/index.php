@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['time'] + 60 * 60 * 24 > time()) {
 
   $stmt = $db->query('SELECT language, color_code FROM languages');
   $languages = $stmt->fetchAll();
-  $stmt = $db->query('SELECT content, color_code FROM contents');
+  $stmt = $db->query('SELECT id, content, color_code FROM contents');
   $contents = $stmt->fetchAll();
 } else {
   header('Location: http://' . $_SERVER['HTTP_HOST'] . '/auth/login.php');
@@ -125,9 +125,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['time'] + 60 * 60 * 24 > time()) {
                 </div>
                 <div class="modal-contents-pc-part d-none d-lg-block pt-3">
                   <p class="font-weight-bold modal-title">学習コンテンツ (複数選択可)</p>
-                  <?php foreach($contents as $index => $content) : ?>
-                    <input id="contents<?= $index + 1?>" type="checkbox" value="<?= $index + 1?>" name="contents[]">
-                    <label for="contents<?= $index + 1?>"><?php echo $content['content']; ?></label>
+                  <?php foreach($contents as $content) : ?>
+                    <input id="contents<?= $content['id']?>" type="checkbox" value="<?= $content['id']?>" name="contents[]">
+                    <label for="contents<?= $content['id']?>"><?php echo $content['content']; ?></label>
                   <?php endforeach; ?>
                   <!-- <input id="contents2" type="checkbox" value="1" name="contents[]">
                   <label for="contents2">ドットインストール</label>
@@ -157,9 +157,9 @@ if (isset($_SESSION['user_id']) && $_SESSION['time'] + 60 * 60 * 24 > time()) {
 
                     <input type="checkbox" id="contents6" value="3" name="contents[]">
                     <label for="contents6">POSSE課題</label> -->
-                    <?php foreach($contents as $index => $content) : ?>
-                    <input id="contents<?= $index + 1 + count($contents)?>" type="checkbox" value="<?= $index + 1?>" name="contents[]">
-                    <label for="contents<?= $index + 1 + count($contents)?>"><?php echo $content['content']; ?></label>
+                    <?php foreach($contents as $content) : ?>
+                    <input id="contents<?= $content['id'] + count($contents)?>" type="checkbox" value="<?= $content['id']?>" name="contents[]">
+                    <label for="contents<?= $content['id'] + count($contents)?>"><?php echo $content['content']; ?></label>
                     <?php endforeach; ?>
                   </div>
                 </div>
